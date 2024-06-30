@@ -1,0 +1,11 @@
+.top-header-bar__header-wrapper {
+  background-color: #fff;
+  padding: 4px 8px;
+  display: flex;
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  min-height: 24px;
+  box-shadow: var(--shadow);
+  align-items: center;
+}

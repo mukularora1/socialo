@@ -1,0 +1,8 @@
+.input-box {
+  outline: none;
+  border: 1px solid var(--shadow-color);
+  box-shadow: var(--shadow);
+  border-radius: 6px;
+  min-height: 24px;
+  padding: 2px 4px;
+}

@@ -1,0 +1,6 @@
+@import url("./style/color-variables.css");
+@import url("./style/other-variables.css");
+* {
+  margin: 0;
+  padding: 0;
+}
