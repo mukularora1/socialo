@@ -1,6 +1,6 @@
 .drop-down__wrapper {
   position: absolute;
   top: 10px;
-  border: 1px solid red;
+  border: 1px solid green;
   z-index: 9999;
 }
