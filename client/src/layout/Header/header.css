@@ -7,7 +7,7 @@
 }
 .header__auth {
   display: flex;
-  gap: 4px;
+  gap: 8px;
   width: -webkit-fill-available;
   justify-content: end;
 }
@@ -15,4 +15,10 @@
   display: flex;
   gap: 8px;
   width: -webkit-fill-available;
+}
+
+@media (max-width: 768px) {
+  .header__navigation-option {
+    display: none;
+  }
 }
