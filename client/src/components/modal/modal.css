@@ -1,0 +1,23 @@
+.modal {
+}
+.modal--backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 4px 8px;
+  box-shadow: var(--shadow);
+  min-height: 250px;
+  min-width: 500px;
+  z-index: 1001;
+}
