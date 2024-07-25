@@ -18,11 +18,13 @@ function Header() {
         </div>
         <div className="header__navigation-option">
           <DropDown>Create</DropDown>
-        </div>
-        <div className="header__search-bar">
-          <InputBox />
+          <DropDown>Social media management</DropDown>
+          <DropDown>Services</DropDown>
         </div>
         <div className="header__auth">
+          <div className="header__search-bar">
+            <InputBox />
+          </div>
           <Button>Login</Button>
           <Button variant="contained">Sign up</Button>
         </div>
