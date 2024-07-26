@@ -2,34 +2,48 @@ import * as fabric from "fabric"; // v6
 import { useEffect, useRef } from "react";
 
 function CanvasEditor() {
-  const canvasEl = useRef<HTMLCanvasElement>(null);
+  const canvasEl = useRef(null);
+
   useEffect(() => {
-    if (!canvasEl.current) return;
+    if (!canvasEl.current) {
+      console.error("Canvas element not found");
+      return;
+    }
+
     const options = {
-      backgroundColor: "lightgray",
+      backgroundColor: "white",
       selection: true,
       hoverCursor: "pointer",
       width: 500,
       height: 500,
-      isDrawingMode: true,
       preserveObjectStacking: true,
     };
+
     const canvas = new fabric.Canvas(canvasEl.current, options);
-    // make the fabric.Canvas instance available to your app
-    // updateCanvasContext(canvas);
+    // canvas.isDrawingMode = true; // Explicitly set drawing mode
+
+    // Add a test object to verify rendering
+    const rect = new fabric.Rect({
+      left: 50,
+      top: 50,
+      fill: "red",
+      width: 50,
+      height: 50,
+    });
+    canvas.add(rect);
+
     return () => {
-      // updateCanvasContext(null);
       canvas.dispose();
     };
   }, []);
 
   return (
-    <canvas
-      width="300"
-      height="300"
-      ref={canvasEl}
-      style={{ border: "1px solid black" }}
-    />
+    <div>
+      <canvas
+        ref={canvasEl}
+        style={{ border: "1px solid black", width: "500px", height: "500px" }}
+      />
+    </div>
   );
 }
 
