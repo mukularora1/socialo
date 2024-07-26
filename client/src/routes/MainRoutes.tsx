@@ -1,5 +1,6 @@
 import Editor from "../pages/Editor";
 import Home from "../pages/Home";
+import SocialMediaPublisher from "../pages/SocialMediaPublisher";
 
 const MainRoutes = [
   {
@@ -9,6 +10,10 @@ const MainRoutes = [
   {
     path: "/editor",
     element: <Editor />,
+  },
+  {
+    path: "/social-media-publisher",
+    element: <SocialMediaPublisher />,
   },
 ];
 
