@@ -28,9 +28,18 @@ function Header() {
           />
         </div>
         <div className="header__navigation-option">
-          <DropDown>Create</DropDown>
-          <DropDown>Social media management</DropDown>
-          <DropDown>Services</DropDown>
+          <DropDown anchorEl={<Button isDropDown={true}>Create</Button>}>
+            1
+          </DropDown>
+          <DropDown
+            anchorEl={
+              <Button isDropDown={true}>Social media management</Button>
+            }>
+            2
+          </DropDown>
+          <DropDown anchorEl={<Button isDropDown={true}>Services</Button>}>
+            3
+          </DropDown>
         </div>
         <div className="header__auth">
           <div className="header__search-bar">

@@ -1,6 +1,8 @@
 .footer {
   border-top: 1px solid gray;
   padding: 24px;
+  background-color: #212121;
+  color: white;
 }
 .footer__list-wrapper {
   display: flex;

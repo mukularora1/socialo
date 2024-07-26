@@ -1,8 +1,13 @@
-import { ReactNode, useState } from "react";
-import Button from "../button/Button";
+import { ReactElement, ReactNode, useState } from "react";
 import "./dropDown.css";
 
-function DropDown({ children }: { children: ReactNode }) {
+function DropDown({
+  children,
+  anchorEl,
+}: {
+  children: ReactNode;
+  anchorEl: HTMLElement | ReactElement | any;
+}) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const showDropdown = () => setIsDropdownVisible(true);
@@ -12,8 +17,10 @@ function DropDown({ children }: { children: ReactNode }) {
       className="drop-down"
       onMouseEnter={showDropdown}
       onMouseLeave={hideDropdown}>
-      <Button isDropDown={true}>{children}</Button>
-      {isDropdownVisible && <div className="drop-down__wrapper">hello</div>}
+      {anchorEl}
+      {isDropdownVisible && (
+        <div className="drop-down__wrapper">{children}</div>
+      )}
     </div>
   );
 }
