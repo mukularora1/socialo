@@ -1,11 +1,22 @@
+import { useState } from "react";
 import brandLogo from "../../assets/SocialO-logo.png";
 import Button from "../../components/button/Button";
 import DropDown from "../../components/drop-down/DropDown";
 import TopHeaderBar from "../../components/header/TopHeaderBar";
 import InputBox from "../../components/input-box/InputBox";
+import Modal from "../../components/modal/Modal";
 import "./header.css";
 
 function Header() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleSignUp = () => {
+    console.log("sign up");
+    setIsModalOpen(true);
+  };
+  const handleLogin = () => {
+    console.log("login");
+    setIsModalOpen(true);
+  };
   return (
     <TopHeaderBar>
       <div className="header">
@@ -25,10 +36,18 @@ function Header() {
           <div className="header__search-bar">
             <InputBox />
           </div>
-          <Button>Login</Button>
-          <Button variant="contained">Sign up</Button>
+          <Button handleClick={handleLogin}>Login</Button>
+          <Button variant="contained" handleClick={handleSignUp}>
+            Sign up
+          </Button>
         </div>
       </div>
+      {isModalOpen && (
+        <Modal
+          show={isModalOpen}
+          backdrop={true}
+          onClose={() => setIsModalOpen(false)}></Modal>
+      )}
     </TopHeaderBar>
   );
 }

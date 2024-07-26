@@ -1,4 +1,3 @@
-import Modal from "../components/modal/Modal";
 import Header from "../layout/Header/Header";
 import Footer from "../layout/footer/Footer";
 
@@ -553,7 +552,6 @@ function Home() {
         culpa adipisci. Nobis nihil fuga iusto?
       </p>
       <Footer />
-      <Modal backdrop={true} show={true} />
     </>
   );
 }
