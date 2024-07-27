@@ -1,0 +1,12 @@
+.publisher-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.publisher-header__publisher-btn {
+  display: flex;
+  width: -webkit-fill-available;
+  display: flex;
+  justify-content: end;
+}

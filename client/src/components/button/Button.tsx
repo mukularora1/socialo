@@ -1,5 +1,4 @@
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 import { ReactNode, useRef } from "react";
 import "./button.css";
 function Button({
@@ -36,7 +35,7 @@ function Button({
   const renderDropDown = () => {
     return (
       <div className="button__caret-down-icon-wrapper">
-        <FontAwesomeIcon icon={faCaretDown} />
+        <ArrowDropDownOutlinedIcon style={{ fontSize: "14px" }} />
       </div>
     );
   };
