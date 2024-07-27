@@ -1,17 +1,14 @@
-import Button from "../components/button/Button";
-import TopHeaderBar from "../components/header/TopHeaderBar";
 import PostCalendar from "../social-media-management/calendar/Calendar";
 import LegendFilter from "../social-media-management/legend-filter/LegendFilter";
+import PublisherHeader from "../social-media-management/publisher-header/PublisherHeader";
 
 function SocialMediaPublisher() {
   return (
     <div>
-      <TopHeaderBar>
-        Publisher
-        <Button isDropDown>Download</Button>
-        <Button variant="outlined">create post</Button>
-      </TopHeaderBar>
-      <PostCalendar />
+      <PublisherHeader />
+      <div style={{ padding: "12px" }}>
+        <PostCalendar />
+      </div>
       <LegendFilter />
     </div>
   );

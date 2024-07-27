@@ -1,5 +1,5 @@
 import { useState } from "react";
-import brandLogo from "../../assets/SocialO-logo.png";
+import BrandLogo from "../../components/brand-logo/BrandLogo";
 import Button from "../../components/button/Button";
 import DropDown from "../../components/drop-down/DropDown";
 import TopHeaderBar from "../../components/header/TopHeaderBar";
@@ -10,27 +10,28 @@ import "./header.css";
 function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleSignUp = () => {
-    console.log("sign up");
     setIsModalOpen(true);
   };
   const handleLogin = () => {
-    console.log("login");
     setIsModalOpen(true);
   };
   return (
     <TopHeaderBar>
       <div className="header">
-        <div className="header__brand-logo-wrapper">
-          <img
-            className="header__brand-logo-wrapper__logo"
-            src={brandLogo}
-            style={{ height: "50px" }}
-          />
-        </div>
+        <BrandLogo />
         <div className="header__navigation-option">
-          <DropDown>Create</DropDown>
-          <DropDown>Social media management</DropDown>
-          <DropDown>Services</DropDown>
+          <DropDown anchorEl={<Button isDropDown={true}>Create</Button>}>
+            1
+          </DropDown>
+          <DropDown
+            anchorEl={
+              <Button isDropDown={true}>Social media management</Button>
+            }>
+            2
+          </DropDown>
+          <DropDown anchorEl={<Button isDropDown={true}>Services</Button>}>
+            3
+          </DropDown>
         </div>
         <div className="header__auth">
           <div className="header__search-bar">
