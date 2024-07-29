@@ -1,12 +1,12 @@
 .sidemenu {
   min-width: 50px;
-  background-color: rgb(37, 38, 39);
+  background-color: var(--brand-secondary-color);
   color: white;
   display: flex;
 }
 .sidemenu__list-wrapper {
   position: relative;
-  background-color: rgb(37, 38, 39);
+  background-color: var(--brand-secondary-color);
   z-index: 9999;
   padding: 8px;
 }
@@ -41,7 +41,7 @@
 .sidemenu__close-btn {
   position: absolute;
   z-index: 1;
-  background-color: rgb(37, 38, 39);
+  background-color: var(--brand-secondary-color);
   cursor: pointer;
   padding: 4px;
   display: flex;

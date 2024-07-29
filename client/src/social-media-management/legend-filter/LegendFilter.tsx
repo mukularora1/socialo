@@ -4,33 +4,79 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import XIcon from "@mui/icons-material/X";
+import React, { useState } from "react";
 import Button from "../../components/button/Button";
 import "./legendFilter.css";
-function LegendFilter() {
+
+// Define the type for button configurations
+interface ButtonConfig {
+  icon: React.ReactNode;
+  label?: string;
+  id: string;
+}
+
+const LegendFilter: React.FC = () => {
+  // State to keep track of active button indices
+  const [activeButtonIndices, setActiveButtonIndices] = useState<number[]>([]);
+
+  // Toggle active state for the clicked button
+  const handleButtonClick = (index: number) => {
+    setActiveButtonIndices((prevState) => {
+      if (prevState.includes(index)) {
+        return prevState.filter((i) => i !== index);
+      } else {
+        return [...prevState, index];
+      }
+    });
+  };
+
+  // Button configuration
+  const buttonConfigs: ButtonConfig[] = [
+    {
+      id: "posted",
+      icon: <DoneOutlinedIcon style={{ fontSize: "16px" }} />,
+      label: "Posted",
+    },
+    {
+      id: "scheduled",
+      icon: <AlarmOutlinedIcon style={{ fontSize: "16px" }} />,
+      label: "Scheduled",
+    },
+    {
+      id: "facebook",
+      icon: <FacebookIcon style={{ fontSize: "16px" }} />,
+    },
+    {
+      icon: <InstagramIcon style={{ fontSize: "16px" }} />,
+      id: "instagram",
+    },
+    {
+      icon: <LinkedInIcon style={{ fontSize: "16px" }} />,
+      id: "linkedin",
+    },
+    {
+      icon: <XIcon style={{ fontSize: "16px" }} />,
+      id: "x",
+    },
+  ];
+
   return (
     <div className="legend-filter">
-      <Button>
-        <DoneOutlinedIcon style={{ fontSize: "16px" }} />
-        Posted
-      </Button>
-      <Button>
-        <AlarmOutlinedIcon style={{ fontSize: "16px" }} />
-        Sheduled
-      </Button>
-      <Button>
-        <FacebookIcon style={{ fontSize: "16px" }} />
-      </Button>
-      <Button>
-        <LinkedInIcon style={{ fontSize: "16px" }} />
-      </Button>
-      <Button>
-        <InstagramIcon style={{ fontSize: "16px" }} />
-      </Button>
-      <Button>
-        <XIcon style={{ fontSize: "16px" }} />
-      </Button>
+      {buttonConfigs.map((config, index) => (
+        <Button
+          key={index}
+          handleClick={() => handleButtonClick(index)}
+          className={
+            activeButtonIndices.includes(index)
+              ? "legend-filter__option-selected"
+              : ""
+          }>
+          {config.icon}
+          {config.label && <span>{config.label}</span>}
+        </Button>
+      ))}
     </div>
   );
-}
+};
 
 export default LegendFilter;

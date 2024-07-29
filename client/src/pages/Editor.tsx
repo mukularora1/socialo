@@ -1,6 +1,7 @@
 import CanvasEditor from "../editor/canvas/CanvasEditor";
 import EditorHeader from "../editor/editor-header/EditorHeader";
 import EditorSidebar from "../editor/editor-sidebar/EditorSidebar";
+import TopToolbar from "../editor/top-toolbar/TopToolbar";
 
 function Editor() {
   return (
@@ -20,10 +21,11 @@ function Editor() {
           <div
             style={{
               display: "flex",
-              justifyContent: "center",
               alignItems: "center",
               height: "-webkit-fill-available",
+              flexDirection: "column",
             }}>
+            <TopToolbar />
             <CanvasEditor />
           </div>
         </div>

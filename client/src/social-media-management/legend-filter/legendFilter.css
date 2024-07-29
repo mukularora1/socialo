@@ -12,3 +12,6 @@
   gap: 8px;
   align-items: center;
 }
+.legend-filter__option-selected {
+  background-color: var(--shadow-color);
+}
