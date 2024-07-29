@@ -6,11 +6,13 @@ function Button({
   variant = "text",
   handleClick = () => {},
   isDropDown = false,
+  className = "",
 }: {
   children?: ReactNode;
   variant?: ButtonVariant;
   handleClick?: () => void;
   isDropDown?: boolean;
+  className?: string;
 }) {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const handleBtnClick = () => {
@@ -42,7 +44,7 @@ function Button({
   return (
     <button
       ref={buttonRef}
-      className={`button__wrapper button__${variant}`}
+      className={`button__wrapper button__${variant} ${className}`}
       onClick={handleBtnClick}>
       {children}
       {isDropDown && renderDropDown()}
