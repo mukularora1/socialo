@@ -1,3 +1,4 @@
+import BottomToolbar from "../editor/bottom-toolbar/BottomToolbar";
 import CanvasEditor from "../editor/canvas/CanvasEditor";
 import EditorHeader from "../editor/editor-header/EditorHeader";
 import EditorSidebar from "../editor/editor-sidebar/EditorSidebar";
@@ -26,7 +27,10 @@ function Editor() {
               flexDirection: "column",
             }}>
             <TopToolbar />
-            <CanvasEditor />
+            <div style={{ padding: "12px 0" }}>
+              <CanvasEditor />
+            </div>
+            <BottomToolbar />
           </div>
         </div>
       </div>

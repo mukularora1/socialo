@@ -2,7 +2,8 @@ import BrushOutlinedIcon from "@mui/icons-material/BrushOutlined";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import InterestsOutlinedIcon from "@mui/icons-material/InterestsOutlined";
 import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
-import { ComponentType, useRef, useState } from "react";
+import classNames from "classnames";
+import { ComponentType, useEffect, useRef, useState } from "react";
 import "./sideMenu.css";
 function SideMenu() {
   const menuItems = [
@@ -26,7 +27,7 @@ function SideMenu() {
     <div
       className="sidemenu__list-wrapper__list"
       onClick={() => handleMenuItemSelected(index)}>
-      <Icon />
+      <Icon sx={{ fontSize: "20px" }} />
       <div className="sidemenu__list-wrapper__list__label"> {label}</div>
     </div>
   );
@@ -34,21 +35,21 @@ function SideMenu() {
     setMenuSelectedPosition((index - menuItems.length) * 65);
   };
   const sidemenuRef = useRef(null);
-  // const [isMenuClose, setIsMenuClose] = useState(false);
-  // const [closeBtnPosition, setCloseBtnPosition] = useState({
-  //   top: 0,
-  //   left: 0,
-  // });
-  // const handleMenuClose = () => {
-  //   setIsMenuClose(true);
-  // };
-  // useEffect(() => {
-  //   setCloseBtnPosition({
-  //     top: sidemenuRef.current?.offsetHeight / 2,
-  //     left: sidemenuRef.current?.offsetWidth,
-  //   });
-  //   console.log(sidemenuRef.current?.offsetHeight);
-  // }, []);
+  const [isMenuClose, setIsMenuClose] = useState(false);
+  const [closeBtnPosition, setCloseBtnPosition] = useState({
+    top: 0,
+    left: 0,
+  });
+  const handleMenuClose = () => {
+    setIsMenuClose(true);
+  };
+  useEffect(() => {
+    setCloseBtnPosition({
+      top: sidemenuRef.current?.offsetHeight / 2,
+      left: sidemenuRef.current?.offsetWidth,
+    });
+    console.log(sidemenuRef.current?.offsetHeight);
+  }, []);
   return (
     <div className="sidemenu" ref={sidemenuRef}>
       <div className="sidemenu__list-wrapper">
@@ -64,7 +65,7 @@ function SideMenu() {
           className="sidemenu__list-wrapper__list sidemenu__list-wrapper__list--selected"
           style={{ top: menuSelectedPosition }}></div>
       </div>
-      {/* <div
+      <div
         className={classNames("sidemenu__content", {
           "sidemenu-close": isMenuClose,
         })}>
@@ -76,11 +77,9 @@ function SideMenu() {
             top: closeBtnPosition.top + "px",
             left: closeBtnPosition.left - 20 + "px",
           }}>
-          <div>
-            <FontAwesomeIcon icon={faArrowCircleLeft} />
-          </div>
+          <div>here</div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

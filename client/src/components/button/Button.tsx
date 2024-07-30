@@ -37,7 +37,7 @@ function Button({
   const renderDropDown = () => {
     return (
       <div className="button__caret-down-icon-wrapper">
-        <ArrowDropDownOutlinedIcon style={{ fontSize: "14px" }} />
+        <ArrowDropDownOutlinedIcon style={{ fontSize: "16px" }} />
       </div>
     );
   };
