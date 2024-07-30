@@ -1,49 +1,84 @@
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useCallback, useRef, useState } from "react";
+import { debounce } from "../../utils/debouncing";
 import "./tooltip.css";
 
 type TooltipPosition = "top" | "left" | "right" | "bottom";
-function Tooltip({
-  children,
-  position = "top",
-  left = 0,
-  top = 0,
-}: {
+
+interface TooltipProps {
   children: ReactNode;
   position?: TooltipPosition;
-  left?: number;
-  top?: number;
-}) {
+  title: string;
+}
+
+function Tooltip({ children, position = "top", title = "" }: TooltipProps) {
   const [tooltipStyle, setTooltipStyle] = useState({
     display: "none",
     top: 0,
     left: 0,
   });
   const contentRef = useRef<HTMLDivElement>(null);
+  const [showTooltip, setShowTooltip] = useState(false);
 
-  const handleTooltipShow = () => {
-    if (contentRef.current) {
-      const { top, left, width } = contentRef.current.getBoundingClientRect();
-      console.log(width);
+  const handleTooltipShow = useCallback(
+    debounce(() => {
+      if (contentRef.current) {
+        const { top, left, width, height } =
+          contentRef.current.getBoundingClientRect();
+        switch (position) {
+          case "top":
+            setTooltipStyle({
+              display: "block",
+              top: top - 30, // Adjust as needed
+              left: left + width / 2, // Center the tooltip horizontally
+            });
+            break;
+          case "bottom":
+            setTooltipStyle({
+              display: "block",
+              top: top + height + 10, // Adjust as needed
+              left: left + width / 2, // Center the tooltip horizontally
+            });
+            break;
+          case "left":
+            setTooltipStyle({
+              display: "block",
+              top: top + height / 2, // Center the tooltip vertically
+              left: left - 120, // Adjust as needed
+            });
+            break;
+          case "right":
+            setTooltipStyle({
+              display: "block",
+              top: top + height / 2, // Center the tooltip vertically
+              left: left + width + 10, // Adjust as needed
+            });
+            break;
+          default:
+            break;
+        }
+        setShowTooltip(true);
+      }
+    }, 100), // Adjust the debounce delay as needed
+    [position]
+  );
 
-      setTooltipStyle({
-        display: "block",
-        top: top - 30, // Adjust the top position as needed
-        left: left, // Center the tooltip horizontally
-      });
-    }
-  };
-
-  const handleTooltipHide = () => {
-    setTooltipStyle((pre) => ({ ...pre, display: "none" }));
-  };
+  const handleTooltipHide = useCallback(
+    debounce(() => {
+      setTooltipStyle((pre) => ({ ...pre, display: "none" }));
+      setShowTooltip(false);
+    }, 200), // Adjust the debounce delay as needed
+    []
+  );
 
   return (
     <div className="tooltip">
-      <div
-        className="tooltip__hover-content"
-        style={{ ...tooltipStyle, position: "absolute" }}>
-        hello
-      </div>
+      {showTooltip && (
+        <div
+          className="tooltip__hover-content"
+          style={{ ...tooltipStyle, position: "absolute" }}>
+          {title}
+        </div>
+      )}
       <div
         className="tooltip__content"
         ref={contentRef}

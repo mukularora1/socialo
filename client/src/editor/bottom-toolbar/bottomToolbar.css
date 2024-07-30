@@ -1,0 +1,12 @@
+.bottom-toolbar {
+  position: absolute;
+  bottom: 0;
+  width: -webkit-fill-available;
+  left: 0;
+  display: flex;
+  justify-content: end;
+  z-index: 9999;
+  padding: 4px 16px;
+  gap: 8px;
+  background-color: white;
+}

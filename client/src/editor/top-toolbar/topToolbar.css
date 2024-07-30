@@ -6,4 +6,15 @@
 }
 .top-toolbar__text-btn {
   display: flex;
+  padding: 0 8px;
+  gap: 2px;
+}
+.top-toolbar__btn {
+  background-color: transparent;
+}
+.top-toolbar__text-btn__font-styles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
 }
