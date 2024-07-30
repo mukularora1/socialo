@@ -1,6 +1,7 @@
 import BrushOutlinedIcon from "@mui/icons-material/BrushOutlined";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
 import InterestsOutlinedIcon from "@mui/icons-material/InterestsOutlined";
+import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
 import classNames from "classnames";
 import { ComponentType, useEffect, useRef, useState } from "react";
@@ -11,6 +12,10 @@ function SideMenu() {
     { Icon: TextFieldsOutlinedIcon, label: "Text" },
     { Icon: CloudUploadOutlinedIcon, label: "Uploads" },
     { Icon: BrushOutlinedIcon, label: "Draw" },
+    {
+      Icon: LayersOutlinedIcon,
+      label: "Pages",
+    },
   ];
   const [menuSelectedPosition, setMenuSelectedPosition] = useState(
     0 - menuItems.length * 65

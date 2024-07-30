@@ -1,6 +1,6 @@
 .sidemenu {
   min-width: 50px;
-  background-color: var(--brand-secondary-color);
+  /* background-color: var(--brand-secondary-color); */
   color: white;
   display: flex;
 }
@@ -28,7 +28,7 @@
   font-size: 14px;
 }
 .sidemenu__list-wrapper__list--selected {
-  background-color: rgb(69, 69, 70);
+  background-color: var(--brand-secondary-color-light);
   transition: all 300ms;
   position: relative;
   z-index: 9;
@@ -48,5 +48,6 @@
   align-items: center;
   border-radius: 6px;
 }
-.sidemenu__content-wrapper {
+.sidemenu__content {
+  background-color: var(--brand-secondary-color-light);
 }

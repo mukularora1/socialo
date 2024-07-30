@@ -2,5 +2,6 @@
   --shadow-color: rgba(57, 76, 96, 0.15);
   --brand-color: rgba(139, 61, 255, 1);
   --brand-secondary-color: rgb(37, 38, 39);
+  --brand-secondary-color-light: rgb(48, 49, 50);
   --brand-color-hover: rgba(139, 61, 255, 0.9);
 }
