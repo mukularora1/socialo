@@ -14,8 +14,8 @@ function CanvasEditor() {
       backgroundColor: "white",
       selection: true,
       hoverCursor: "pointer",
-      width: 400,
-      height: 400,
+      width: 350,
+      height: 350,
       preserveObjectStacking: true,
     };
 
@@ -41,7 +41,7 @@ function CanvasEditor() {
     <div>
       <canvas
         ref={canvasEl}
-        style={{ border: "1px solid black", width: "400px", height: "400px" }}
+        style={{ border: "1px solid black", width: "350px", height: "350px" }}
       />
     </div>
   );

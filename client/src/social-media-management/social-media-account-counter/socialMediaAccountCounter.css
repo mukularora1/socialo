@@ -1,0 +1,12 @@
+.social-media-account-counter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  padding: 4px 8px;
+  border: 1px dashed var(--brand-secondary-color-light);
+}
+.social-media-account-counter__account-wrapper {
+  display: flex;
+  gap: 2px;
+}

@@ -1,3 +1,11 @@
+.editor-header {
+  background-image: linear-gradient(
+    to right,
+    var(--brand-color),
+    var(--brand-secondary-color-light)
+  );
+}
+
 .editor-header__right-btns {
   display: flex;
 }

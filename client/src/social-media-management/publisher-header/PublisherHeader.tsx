@@ -6,6 +6,7 @@ import BrandLogo from "../../components/brand-logo/BrandLogo";
 import Button from "../../components/button/Button";
 import TopHeaderBar from "../../components/header/TopHeaderBar";
 import Modal from "../../components/modal/Modal";
+import SocialMediaAccountCounter from "../social-media-account-counter/SocialMediaAccountCounter";
 import "./publisherHeader.css";
 function PublisherHeader() {
   const [isCreateModalShow, setIsCreateModalShow] = useState(false);
@@ -16,8 +17,8 @@ function PublisherHeader() {
     <TopHeaderBar height="50px">
       <div className="publisher-header">
         <BrandLogo />
-        <div>social media accounts</div>
         <div className="publisher-header__publisher-btn">
+          <SocialMediaAccountCounter />
           <Button variant="outlined">
             Connected Accounts
             <AccountCircleOutlinedIcon sx={{ fontSize: "16px" }} />{" "}

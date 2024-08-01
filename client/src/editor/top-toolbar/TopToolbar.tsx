@@ -7,6 +7,7 @@ import {
   FormatBold as FormatBoldIcon,
   FormatItalic as FormatItalicIcon,
   FormatUnderlined as FormatUnderlinedIcon,
+  Lock as LockIcon,
   Opacity as OpacityIcon,
 } from "@mui/icons-material";
 import Button from "../../components/button/Button";
@@ -22,6 +23,10 @@ const icons = [
   { component: FormatAlignRightIcon, tooltip: "Align Right" },
   { component: FormatAlignCenterIcon, tooltip: "Align Center" },
   { component: ColorLensIcon, tooltip: "Color" },
+  {
+    component: LockIcon,
+    tooltip: "Lock",
+  },
 ];
 
 const IconButton = ({ Icon, tooltip }) => (

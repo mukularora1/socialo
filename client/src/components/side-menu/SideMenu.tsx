@@ -1,6 +1,8 @@
 import BrushOutlinedIcon from "@mui/icons-material/BrushOutlined";
 import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
+import ImageIcon from "@mui/icons-material/Image";
 import InterestsOutlinedIcon from "@mui/icons-material/InterestsOutlined";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
 import classNames from "classnames";
@@ -15,6 +17,10 @@ function SideMenu() {
     {
       Icon: LayersOutlinedIcon,
       label: "Pages",
+    },
+    {
+      Icon: ImageIcon,
+      label: "Images",
     },
   ];
   const [menuSelectedPosition, setMenuSelectedPosition] = useState(
@@ -37,6 +43,7 @@ function SideMenu() {
     </div>
   );
   const handleMenuItemSelected = (index: number) => {
+    setIsMenuClose(false);
     setMenuSelectedPosition((index - menuItems.length) * 65);
   };
   const sidemenuRef = useRef(null);
@@ -46,7 +53,7 @@ function SideMenu() {
     left: 0,
   });
   const handleMenuClose = () => {
-    setIsMenuClose(true);
+    setIsMenuClose((pre) => !pre);
   };
   useEffect(() => {
     setCloseBtnPosition({
@@ -67,7 +74,12 @@ function SideMenu() {
           />
         ))}
         <div
-          className="sidemenu__list-wrapper__list sidemenu__list-wrapper__list--selected"
+          className={classNames(
+            "sidemenu__list-wrapper__list sidemenu__list-wrapper__list--selected",
+            {
+              "sidemenu-close": isMenuClose,
+            }
+          )}
           style={{ top: menuSelectedPosition }}></div>
       </div>
       <div
@@ -82,7 +94,9 @@ function SideMenu() {
             top: closeBtnPosition.top + "px",
             left: closeBtnPosition.left - 20 + "px",
           }}>
-          <div>here</div>
+          <div>
+            <KeyboardDoubleArrowLeftIcon />
+          </div>
         </div>
       </div>
     </div>

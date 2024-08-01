@@ -8,5 +8,6 @@
   display: flex;
   width: -webkit-fill-available;
   display: flex;
+  gap: 6px;
   justify-content: end;
 }
