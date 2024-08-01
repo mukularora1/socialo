@@ -1,8 +1,9 @@
 .top-toolbar {
   width: -webkit-fill-available;
   padding: 4px 8px;
-  color: white;
-  background-color: var(--brand-color);
+  /* color: white; */
+  /* background-color: var(--brand-color); */
+  background-color: white;
 }
 .top-toolbar__text-btn {
   display: flex;

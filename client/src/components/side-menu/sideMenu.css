@@ -34,20 +34,21 @@
   z-index: 9;
 }
 .sidemenu-close {
-  transform: translateX(-500px);
-  transition: all 1000ms ease-in-out;
-  position: relative;
+  /* transform: translateX(-500px); */
+  /* transition: all 1000ms ease-in-out; */
+  display: none !important;
 }
 .sidemenu__close-btn {
   position: absolute;
   z-index: 1;
-  background-color: var(--brand-secondary-color);
+  background-color: var(--brand-secondary-color-light);
   cursor: pointer;
-  padding: 4px;
   display: flex;
   align-items: center;
   border-radius: 6px;
 }
 .sidemenu__content {
+  width: 275px;
+  display: flex;
   background-color: var(--brand-secondary-color-light);
 }
