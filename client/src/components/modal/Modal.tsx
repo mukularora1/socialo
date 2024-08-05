@@ -6,12 +6,14 @@ import "./modal.css";
 function Modal({
   backdrop = false,
   onClose,
+  className = "",
   show = false,
   children,
 }: {
   backdrop?: boolean;
   onClose?: () => void;
   show: boolean;
+  className?: "";
   children?: ReactNode;
 }) {
   const [isModalShow, setIsModalShow] = useState(show);
@@ -30,7 +32,9 @@ function Modal({
         <div
           className={classNames("modal", { "modal--backdrop": backdrop })}
           onClick={handleClose}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div
+            className={`modal-content ${className}`}
+            onClick={(e) => e.stopPropagation()}>
             {children}
           </div>
         </div>

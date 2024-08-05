@@ -2,6 +2,7 @@ import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useEffect } from "react";
+import "./calendar.css";
 function PostCalendar() {
   useEffect(() => {
     const calendarEl = document.getElementById("calendar") as any;
