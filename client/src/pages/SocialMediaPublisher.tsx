@@ -6,8 +6,11 @@ function SocialMediaPublisher() {
   return (
     <div>
       <PublisherHeader />
-      <div style={{ padding: "12px" }}>
-        <PostCalendar />
+      <div style={{ display: "flex" }}>
+        <div>sidemenu</div>
+        <div style={{ padding: "12px", width: "80vw" }}>
+          <PostCalendar />
+        </div>
       </div>
       <LegendFilter />
     </div>

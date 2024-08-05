@@ -1,0 +1,33 @@
+.login {
+  border-radius: 6px;
+  display: flex;
+}
+.login__left,
+.login__right {
+  flex: 1;
+}
+.login__left {
+  padding: 12px;
+}
+.login__right img {
+  width: 100%;
+}
+.login__detail-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.login__login-or {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.login__login-or__line {
+  flex: 1;
+  border-top: 1px dashed var(--brand-secondary-color-light);
+}
+.login__google-login {
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+}

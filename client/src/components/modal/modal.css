@@ -15,9 +15,8 @@
 .modal-content {
   background-color: #fff;
   border-radius: 6px;
-  padding: 4px 8px;
   box-shadow: var(--shadow);
-  min-height: 250px;
-  min-width: 500px;
+  min-height: 100px;
+  min-width: 100px;
   z-index: 1001;
 }

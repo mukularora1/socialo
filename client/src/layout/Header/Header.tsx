@@ -5,6 +5,7 @@ import DropDown from "../../components/drop-down/DropDown";
 import TopHeaderBar from "../../components/header/TopHeaderBar";
 import InputBox from "../../components/input-box/InputBox";
 import Modal from "../../components/modal/Modal";
+import Login from "../login/Login";
 import "./header.css";
 
 function Header() {
@@ -47,7 +48,9 @@ function Header() {
         <Modal
           show={isModalOpen}
           backdrop={true}
-          onClose={() => setIsModalOpen(false)}></Modal>
+          onClose={() => setIsModalOpen(false)}>
+          <Login />
+        </Modal>
       )}
     </TopHeaderBar>
   );
