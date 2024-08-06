@@ -7,6 +7,8 @@ import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
 import classNames from "classnames";
 import { ComponentType, useEffect, useRef, useState } from "react";
+// import ColorPickerTab from "../../editor/side-menu-tabs/color-picker-tab/ColorPickerTab";
+import ElementsTab from "../../editor/side-menu-tabs/elements-tab/ElementsTab";
 import "./sideMenu.css";
 function SideMenu() {
   const menuItems = [
@@ -86,7 +88,10 @@ function SideMenu() {
         className={classNames("sidemenu__content", {
           "sidemenu-close": isMenuClose,
         })}>
-        <div className="sidemenu__content__body">hello world</div>
+        <div className="sidemenu__content__body">
+          {/* <ColorPickerTab /> */}
+          <ElementsTab />
+        </div>
         <div
           className="sidemenu__close-btn"
           onClick={handleMenuClose}

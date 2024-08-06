@@ -52,3 +52,10 @@
   display: flex;
   background-color: var(--brand-secondary-color-light);
 }
+.sidemenu__content__body {
+  padding: 4px;
+}
+.color-picker-tab__color-picker {
+  display: flex;
+  justify-content: center;
+}
