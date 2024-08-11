@@ -30,6 +30,18 @@ function CanvasEditor() {
       width: 50,
       height: 50,
     });
+    console.log("k");
+    const fun = async () => {
+      const x = await fabric.Image.fromURL(
+        "https://i.imgur.com/tn6QBOD_d.webp?maxwidth=760&fidelity=grand"
+      );
+      x.scaleToWidth(50);
+
+      console.log(x);
+      canvas.add(x);
+    };
+    fun();
+
     canvas.add(rect);
 
     return () => {
