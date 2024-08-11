@@ -1,5 +1,6 @@
 import {
   ArrowDropDownOutlined as ArrowDropDownOutlinedIcon,
+  AutoFixHighOutlined as AutoFixHighOutlinedIcon,
   ColorLens as ColorLensIcon,
   FormatAlignCenter as FormatAlignCenterIcon,
   FormatAlignLeft as FormatAlignLeftIcon,
@@ -43,6 +44,9 @@ function TopToolbar() {
       <div className="top-toolbar__text-btn">
         <Button className="top-toolbar__text-btn__font-styles">
           font style <ArrowDropDownOutlinedIcon style={{ fontSize: "16px" }} />
+        </Button>
+        <Button className="top-toolbar__text-btn__font-styles">
+          Edit <AutoFixHighOutlinedIcon style={{ fontSize: "16px" }} />
         </Button>
         {icons.map(({ component: Icon, tooltip }, index) => (
           <IconButton key={index} Icon={Icon} tooltip={tooltip} />

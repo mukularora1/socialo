@@ -1,7 +1,9 @@
 import "./Loader.css";
-function Loader() {
+function Loader({ size = "small" }: { size?: LoaderType }) {
+  const loaderClassName = `loader loader--${size}`;
+
   return (
-    <div className="loader">
+    <div className={loaderClassName}>
       <div className="loader__dot"></div>
       <div className="loader__dot"></div>
       <div className="loader__dot"></div>

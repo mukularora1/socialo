@@ -54,6 +54,7 @@
 }
 .sidemenu__content__body {
   padding: 4px;
+  width: 100%;
 }
 .color-picker-tab__color-picker {
   display: flex;

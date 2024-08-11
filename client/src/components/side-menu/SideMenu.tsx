@@ -8,7 +8,8 @@ import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
 import classNames from "classnames";
 import { ComponentType, useEffect, useRef, useState } from "react";
 // import ColorPickerTab from "../../editor/side-menu-tabs/color-picker-tab/ColorPickerTab";
-import ElementsTab from "../../editor/side-menu-tabs/elements-tab/ElementsTab";
+// import ElementsTab from "../../editor/side-menu-tabs/elements-tab/ElementsTab";
+import AssetuploadTab from "../../editor/side-menu-tabs/asset-upload-tab/AssetuploadTab";
 import "./sideMenu.css";
 function SideMenu() {
   const menuItems = [
@@ -90,7 +91,8 @@ function SideMenu() {
         })}>
         <div className="sidemenu__content__body">
           {/* <ColorPickerTab /> */}
-          <ElementsTab />
+          {/* <ElementsTab /> */}
+          <AssetuploadTab />
         </div>
         <div
           className="sidemenu__close-btn"
