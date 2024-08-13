@@ -21,6 +21,17 @@ function CanvasEditor() {
       height: 350,
       preserveObjectStacking: true,
     });
+    el.on("selection:updated", () => {
+      console.log("k");
+    });
+    el.on("object:modified", (e) => {
+      console.log("kp", e.target);
+    });
+    el.on("object:added", (e) => {
+      console.log("Object added:", e.target);
+      console.log("Object type:", e.target.type); // Type of the object
+      console.log("Object properties:", e.target.toObject());
+    });
 
     // Function to load an image and add it to the canvas
     const fun = async () => {
@@ -28,7 +39,6 @@ function CanvasEditor() {
         "https://i.imgur.com/tn6QBOD_d.webp?maxwidth=760&fidelity=grand"
       );
       x.scaleToWidth(50);
-
       el.add(x);
     };
     fun();

@@ -5,10 +5,14 @@ export const counterSlice = createSlice({
   initialState: {
     canvas: null,
     objects: [] as any,
+    selectedObject: null,
   },
   reducers: {
-    addObjects: (state, { payload }) => {
-      state.objects.push(payload);
+    addObjects: ({ objects }, { payload }) => {
+      objects.push(payload);
+    },
+    updateSelectedObject: (state, { payload }) => {
+      console.log(payload);
     },
   },
 });
