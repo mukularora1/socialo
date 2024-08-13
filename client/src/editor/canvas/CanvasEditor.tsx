@@ -1,10 +1,12 @@
 import * as fabric from "fabric"; // v6
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectCanvasStore } from "../store/editorSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCanvasStore, updateSelectedObject } from "../store/editorSlice";
+
 function CanvasEditor() {
   const canvasEl = useRef(null);
   const canvasStore = useSelector(selectCanvasStore);
+  const dispatch = useDispatch();
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   useEffect(() => {
     if (!canvasEl.current) {
@@ -21,7 +23,14 @@ function CanvasEditor() {
       height: 350,
       preserveObjectStacking: true,
     });
-    el.on("selection:updated", () => {
+    el.on("selection:updated", ({ selected }) => {
+      console.log(selected[0]?.fill);
+      dispatch(updateSelectedObject(selected[0]));
+      console.log("k");
+    });
+    el.on("selection:created", ({ selected }) => {
+      console.log(selected[0]?.fill);
+      dispatch(updateSelectedObject(selected[0]));
       console.log("k");
     });
     el.on("object:modified", (e) => {
@@ -85,6 +94,11 @@ function CanvasEditor() {
       });
     }
   }, [canvasStore.objects]);
+  useEffect(() => {
+    console.log("useeffect", canvas?.getActiveObject());
+    canvas?.getActiveObject()?.set("fill", canvasStore.fill);
+    canvas?.renderAll();
+  }, [canvasStore.fill]);
   return (
     <div>
       <canvas

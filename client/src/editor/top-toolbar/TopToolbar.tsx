@@ -12,6 +12,7 @@ import {
   Opacity as OpacityIcon,
 } from "@mui/icons-material";
 import Button from "../../components/button/Button";
+import InputBox from "../../components/input-box/InputBox";
 import Tooltip from "../../components/tooltip/Tooltip";
 import "./topToolbar.css";
 
@@ -48,9 +49,11 @@ function TopToolbar() {
         <Button className="top-toolbar__text-btn__font-styles">
           Edit <AutoFixHighOutlinedIcon style={{ fontSize: "16px" }} />
         </Button>
+        <Button className="top-toolbar__text-btn__font-styles">Group</Button>
         {icons.map(({ component: Icon, tooltip }, index) => (
           <IconButton key={index} Icon={Icon} tooltip={tooltip} />
         ))}
+        <InputBox placeholder="rotation in degree *" />
       </div>
     </div>
   );
