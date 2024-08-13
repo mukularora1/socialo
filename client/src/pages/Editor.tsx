@@ -5,6 +5,21 @@ import EditorSidebar from "../editor/editor-sidebar/EditorSidebar";
 import TopToolbar from "../editor/top-toolbar/TopToolbar";
 
 function Editor() {
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("handleDragOver", e);
+  };
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("handleDragLeave", e);
+  };
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("handleDrop", e);
+  };
   return (
     <>
       <EditorHeader />
@@ -27,7 +42,11 @@ function Editor() {
               flexDirection: "column",
             }}>
             <TopToolbar />
-            <div style={{ padding: "12px 0" }}>
+            <div
+              style={{ padding: "12px 0" }}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}>
               <CanvasEditor />
               <div
                 className="editor__add-new-page"

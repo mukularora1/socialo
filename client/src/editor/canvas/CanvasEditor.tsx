@@ -1,28 +1,39 @@
 import * as fabric from "fabric"; // v6
-import { useEffect, useRef } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCanvasStore } from "../store/editorSlice";
 function CanvasEditor() {
   const canvasEl = useRef(null);
-
+  const canvasStore = useSelector(selectCanvasStore);
+  const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   useEffect(() => {
     if (!canvasEl.current) {
       console.error("Canvas element not found");
       return;
     }
 
-    const options = {
+    // Initialize fabric.Canvas
+    const el = new fabric.Canvas(canvasEl.current, {
       backgroundColor: "white",
       selection: true,
       hoverCursor: "pointer",
       width: 350,
       height: 350,
       preserveObjectStacking: true,
+    });
+
+    // Function to load an image and add it to the canvas
+    const fun = async () => {
+      const x = await fabric.Image.fromURL(
+        "https://i.imgur.com/tn6QBOD_d.webp?maxwidth=760&fidelity=grand"
+      );
+      x.scaleToWidth(50);
+
+      el.add(x);
     };
+    fun();
 
-    const canvas = new fabric.Canvas(canvasEl.current, options);
-    // canvas.isDrawingMode = true; // Explicitly set drawing mode
-
-    // Add a test object to verify rendering
+    // Add a rectangle
     const rect = new fabric.Rect({
       left: 50,
       top: 50,
@@ -30,25 +41,40 @@ function CanvasEditor() {
       width: 50,
       height: 50,
     });
-    console.log("k");
-    const fun = async () => {
-      const x = await fabric.Image.fromURL(
-        "https://i.imgur.com/tn6QBOD_d.webp?maxwidth=760&fidelity=grand"
-      );
-      x.scaleToWidth(50);
 
-      console.log(x);
-      canvas.add(x);
-    };
-    fun();
-
-    canvas.add(rect);
-
+    if (el) {
+      el.add(rect);
+    }
+    setCanvas(el);
     return () => {
-      canvas.dispose();
+      if (el) {
+        el.dispose(); // Clean up the canvas
+      }
     };
   }, []);
+  useEffect(() => {
+    if (canvasEl.current && canvas) {
+      canvas.clear();
+      canvas.backgroundColor = "white"; // Set to your desired color
+      canvas.renderAll();
+      // Add objects from Redux store to canvas
+      canvasStore.objects.forEach((obj) => {
+        if (obj.type === "Image" && obj.options.url) {
+          const fun = async () => {
+            const x = await fabric.Image.fromURL(obj.options.url, obj.options);
+            x.scaleToWidth(50);
 
+            canvas.add(x);
+          };
+          fun();
+          // loadImage(obj.options.url, obj.options);
+        } else {
+          // Handle other types of objects if needed
+          console.warn(`Unknown object type: ${obj.type}`);
+        }
+      });
+    }
+  }, [canvasStore.objects]);
   return (
     <div>
       <canvas
