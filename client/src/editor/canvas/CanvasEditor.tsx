@@ -1,10 +1,12 @@
 import * as fabric from "fabric"; // v6
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectCanvasStore } from "../store/editorSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCanvasStore, updateSelectedObject } from "../store/editorSlice";
+
 function CanvasEditor() {
   const canvasEl = useRef(null);
   const canvasStore = useSelector(selectCanvasStore);
+  const dispatch = useDispatch();
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   useEffect(() => {
     if (!canvasEl.current) {
@@ -21,6 +23,24 @@ function CanvasEditor() {
       height: 350,
       preserveObjectStacking: true,
     });
+    el.on("selection:updated", ({ selected }) => {
+      console.log(selected[0]?.fill);
+      dispatch(updateSelectedObject(selected[0]));
+      console.log("k");
+    });
+    el.on("selection:created", ({ selected }) => {
+      console.log(selected[0]?.fill);
+      dispatch(updateSelectedObject(selected[0]));
+      console.log("k");
+    });
+    el.on("object:modified", (e) => {
+      console.log("kp", e.target);
+    });
+    el.on("object:added", (e) => {
+      console.log("Object added:", e.target);
+      console.log("Object type:", e.target.type); // Type of the object
+      console.log("Object properties:", e.target.toObject());
+    });
 
     // Function to load an image and add it to the canvas
     const fun = async () => {
@@ -28,7 +48,6 @@ function CanvasEditor() {
         "https://i.imgur.com/tn6QBOD_d.webp?maxwidth=760&fidelity=grand"
       );
       x.scaleToWidth(50);
-
       el.add(x);
     };
     fun();
@@ -75,6 +94,11 @@ function CanvasEditor() {
       });
     }
   }, [canvasStore.objects]);
+  useEffect(() => {
+    console.log("useeffect", canvas?.getActiveObject());
+    canvas?.getActiveObject()?.set("fill", canvasStore.fill);
+    canvas?.renderAll();
+  }, [canvasStore.fill]);
   return (
     <div>
       <canvas

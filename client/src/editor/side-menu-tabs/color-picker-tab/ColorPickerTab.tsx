@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
+import { useDispatch } from "react-redux";
+import { updateFill } from "../../store/editorSlice";
 import "./colorPickerTab.css";
 const colors = [
   { color: "#013243", id: 1 }, // Deep Sea Blue
@@ -19,11 +22,24 @@ const colors = [
 ];
 
 function ColorPickerTab() {
+  const [color, setColor] = useState("#b32aa9");
+  const dispatch = useDispatch();
+  const handleColorChange = (e) => {
+    dispatch(updateFill(e));
+
+    // canvasStore.selectedObject.set("fill", e);
+    setColor(e);
+  };
   return (
     <div className="color-picker-tab">
-      <div className="color-picker-tab__heading">Colors</div>
+      <div className="color-picker-tab__heading">Colors: {color}</div>
       <div className="color-picker-tab__color-picker">
-        <HexColorPicker style={{ height: "150px", width: "170px" }} />
+        <HexColorPicker
+          style={{ height: "150px", width: "170px" }}
+          color={color}
+          onChange={handleColorChange}
+          // onChange={setColor}
+        />
       </div>
       <div className="color-picker-tab__heading">default colors</div>
       <div className="color-picker-tab__default-colors">
