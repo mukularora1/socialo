@@ -1,3 +1,4 @@
+import AdminDashboard from "../pages/AdminDashboard";
 import Editor from "../pages/Editor";
 import Home from "../pages/Home";
 import SocialMediaPublisher from "../pages/SocialMediaPublisher";
@@ -14,6 +15,10 @@ const MainRoutes = [
   {
     path: "/social-media-publisher",
     element: <SocialMediaPublisher />,
+  },
+  {
+    path: "/admin",
+    element: <AdminDashboard />,
   },
 ];
 

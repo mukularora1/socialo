@@ -7,9 +7,10 @@ import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
 import classNames from "classnames";
 import { ComponentType, useEffect, useRef, useState } from "react";
-import ColorPickerTab from "../../editor/side-menu-tabs/color-picker-tab/ColorPickerTab";
-import ElementsTab from "../../editor/side-menu-tabs/elements-tab/ElementsTab";
+// import ColorPickerTab from "../../editor/side-menu-tabs/color-picker-tab/ColorPickerTab";
+// import ElementsTab from "../../editor/side-menu-tabs/elements-tab/ElementsTab";
 // import AssetuploadTab from "../../editor/side-menu-tabs/asset-upload-tab/AssetuploadTab";
+import TextTab from "../../editor/side-menu-tabs/text-tab/TextTab";
 import "./sideMenu.css";
 function SideMenu() {
   const menuItems = [
@@ -89,9 +90,10 @@ function SideMenu() {
           "sidemenu-close": isMenuClose,
         })}>
         <div className="sidemenu__content__body">
-          <ColorPickerTab />
-          <ElementsTab />
+          {/* <ColorPickerTab /> */}
+          {/* <ElementsTab /> */}
           {/* <AssetuploadTab /> */}
+          <TextTab />
         </div>
         <div
           className="sidemenu__close-btn"
