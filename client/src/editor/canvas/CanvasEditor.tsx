@@ -1,4 +1,5 @@
 import * as fabric from "fabric"; // v6
+import { FabricImage } from "fabric";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCanvasStore, updateSelectedObject } from "../store/editorSlice";
@@ -43,27 +44,41 @@ function CanvasEditor() {
     });
 
     // Function to load an image and add it to the canvas
-    const fun = async () => {
-      const x = await fabric.Image.fromURL(
-        "https://i.imgur.com/tn6QBOD_d.webp?maxwidth=760&fidelity=grand"
-      );
-      x.scaleToWidth(50);
-      el.add(x);
-    };
-    fun();
+    // const fun = async () => {
+    //   const x = await fabric.Image.fromURL(
+    //     "https://i.imgur.com/tn6QBOD_d.webp?maxwidth=760&fidelity=grand"
+    //   );
+    //   x.scaleToWidth(50);
+    //   el.add(x);
+    // };
+    // fun();
 
     // Add a rectangle
-    const rect = new fabric.Rect({
-      left: 50,
-      top: 50,
-      fill: "red",
-      width: 50,
-      height: 50,
+    // const rect = new fabric.Rect({
+    //   left: 50,
+    //   top: 50,
+    //   fill: "red",
+    //   width: 50,
+    //   height: 50,
+    // });
+
+    // if (el) {
+    //   el.add(rect);
+    // }
+    const editableText = new fabric.IText("Edit me!", {
+      left: 100, // X position on the canvas
+      top: 100, // Y position on the canvas
+      fontFamily: "Arial", // Font family
+      fontSize: 30, // Font size
+      fill: "#000000", // Text color
+      editable: true, // Make the text editable
     });
 
-    if (el) {
-      el.add(rect);
-    }
+    // Add the editable text object to the canvas
+    el.add(editableText);
+    const firstObject = el.getObjects()[0];
+    el.setActiveObject(firstObject);
+    el.renderAll();
     setCanvas(el);
     return () => {
       if (el) {
@@ -80,16 +95,38 @@ function CanvasEditor() {
       canvasStore.objects.forEach((obj) => {
         if (obj.type === "Image" && obj.options.url) {
           const fun = async () => {
-            const x = await fabric.Image.fromURL(obj.options.url, obj.options);
+            const x = await FabricImage.fromURL(obj.options.url, obj.options);
             x.scaleToWidth(50);
 
             canvas.add(x);
           };
           fun();
-          // loadImage(obj.options.url, obj.options);
-        } else {
-          // Handle other types of objects if needed
-          console.warn(`Unknown object type: ${obj.type}`);
+        }
+        if (obj.type === "svg" && obj.options.url) {
+          const fun = async () => {
+            try {
+              const { objects, options } = await fabric.loadSVGFromURL(
+                obj.options.url
+              );
+
+              // Filter out any null values
+              console.log(objects, options);
+
+              const filteredObjects = objects.filter((obj) => obj !== null);
+
+              // Group the filtered SVG elements
+              const svgData = fabric.util.groupSVGElements(
+                filteredObjects,
+                options
+              );
+              svgData.scaleToWidth(50);
+              canvas.add(svgData);
+              canvas.renderAll();
+            } catch (error) {
+              console.error("Error loading SVG:", error);
+            }
+          };
+          fun(); // Call the async function
         }
       });
     }

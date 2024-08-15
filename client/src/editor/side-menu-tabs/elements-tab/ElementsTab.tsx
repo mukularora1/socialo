@@ -26,7 +26,7 @@ function ElementsTab() {
   const handleElementClick = (url: string) => {
     dispatch(
       addObjects({
-        type: "Image",
+        type: "svg",
         options: {
           url: `http://localhost:5173${url}`,
           left: 100, // Example position
