@@ -20,6 +20,10 @@ const elements = [
     id: 4,
     url: "/square-svgrepo-com.svg",
   },
+  {
+    id: 5,
+    url: "/christmas-tree-svgrepo-com.svg",
+  },
 ];
 function ElementsTab() {
   const dispatch = useDispatch();

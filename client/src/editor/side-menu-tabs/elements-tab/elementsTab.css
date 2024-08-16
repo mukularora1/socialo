@@ -3,9 +3,9 @@
 }
 .elements-tab__element-groups__group-wrapper__element-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   flex-wrap: wrap;
-  gap: 2px;
+  gap: 3px;
   padding: 4px 0;
 }
 .elements-tab__element-groups__group-wrapper__name-wrapper--group-name {

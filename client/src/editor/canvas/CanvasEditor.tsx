@@ -1,13 +1,14 @@
 import * as fabric from "fabric"; // v6
 import { FabricImage } from "fabric";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCanvasStore, updateSelectedObject } from "../store/editorSlice";
+import { useSelector } from "react-redux";
+import { selectCanvasStore } from "../store/editorSlice";
+import { getElementImpInfo } from "./canvas.utils";
 
 function CanvasEditor() {
   const canvasEl = useRef(null);
   const canvasStore = useSelector(selectCanvasStore);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   useEffect(() => {
     if (!canvasEl.current) {
@@ -25,46 +26,25 @@ function CanvasEditor() {
       preserveObjectStacking: true,
     });
     el.on("selection:updated", ({ selected }) => {
-      console.log(selected[0]?.fill);
-      dispatch(updateSelectedObject(selected[0]));
-      console.log("k");
+      console.log(selected);
+      const selectedElInfo = getElementImpInfo(selected[0]);
+      console.log(selectedElInfo);
     });
     el.on("selection:created", ({ selected }) => {
-      console.log(selected[0]?.fill);
-      dispatch(updateSelectedObject(selected[0]));
-      console.log("k");
+      console.log(selected);
+      const selectedElInfo = getElementImpInfo(selected[0]);
+      console.log(selectedElInfo);
     });
     el.on("object:modified", (e) => {
       console.log("kp", e.target);
+      const selectedElInfo = getElementImpInfo(e.target);
+      console.log(selectedElInfo);
     });
     el.on("object:added", (e) => {
       console.log("Object added:", e.target);
       console.log("Object type:", e.target.type); // Type of the object
-      console.log("Object properties:", e.target.toObject());
+      el?.setActiveObject(el.getObjects()[el.getObjects().length - 1]);
     });
-
-    // Function to load an image and add it to the canvas
-    // const fun = async () => {
-    //   const x = await fabric.Image.fromURL(
-    //     "https://i.imgur.com/tn6QBOD_d.webp?maxwidth=760&fidelity=grand"
-    //   );
-    //   x.scaleToWidth(50);
-    //   el.add(x);
-    // };
-    // fun();
-
-    // Add a rectangle
-    // const rect = new fabric.Rect({
-    //   left: 50,
-    //   top: 50,
-    //   fill: "red",
-    //   width: 50,
-    //   height: 50,
-    // });
-
-    // if (el) {
-    //   el.add(rect);
-    // }
     const editableText = new fabric.IText("Edit me!", {
       left: 100, // X position on the canvas
       top: 100, // Y position on the canvas
