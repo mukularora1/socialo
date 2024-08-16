@@ -136,8 +136,11 @@ function CanvasEditor() {
     canvas?.getActiveObject()?.set("fill", canvasStore.fill);
     canvas?.renderAll();
   }, [canvasStore.fill]);
+  const handleContextMenu = () => {
+    console.log("handleContextMenu");
+  };
   return (
-    <div>
+    <div onContextMenu={handleContextMenu}>
       <canvas
         ref={canvasEl}
         style={{ border: "1px solid black", width: "350px", height: "350px" }}

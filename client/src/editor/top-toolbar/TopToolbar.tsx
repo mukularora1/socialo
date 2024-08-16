@@ -10,6 +10,8 @@ import {
   FormatUnderlined as FormatUnderlinedIcon,
   Lock as LockIcon,
   Opacity as OpacityIcon,
+  Redo as RedoIcon,
+  Undo as UndoIcon,
 } from "@mui/icons-material";
 import Button from "../../components/button/Button";
 import InputBox from "../../components/input-box/InputBox";
@@ -28,6 +30,14 @@ const icons = [
   {
     component: LockIcon,
     tooltip: "Lock",
+  },
+  {
+    component: UndoIcon,
+    tooltip: "Undo",
+  },
+  {
+    component: RedoIcon,
+    tooltip: "Redo",
   },
 ];
 
