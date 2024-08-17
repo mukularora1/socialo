@@ -31,14 +31,24 @@ function ElementsTab() {
     dispatch(
       addObjects({
         type: "svg",
-        options: {
-          url: `http://localhost:5173${url}`,
-          left: 100, // Example position
-          top: 100, // Example position
-          width: 200, // Example dimensions
-          height: 200, // Example dimensions
-        },
-        id: Math.random(),
+        url: `http://localhost:5173${url}`,
+        left: 150,
+        top: 150,
+        width: 50,
+        height: 50,
+        id: Math.ceil(Math.random() * 10000),
+        angle: 0,
+        fill: "#000",
+        flipX: false,
+        flipY: false,
+        lockMovementX: false,
+        lockMovementY: false,
+        lockRotation: false,
+        lockScalingX: false,
+        lockScalingY: false,
+        opacity: 1,
+        scaleX: 0.5,
+        scaleY: 0.5,
       })
     );
   };
@@ -60,7 +70,8 @@ function ElementsTab() {
               <div
                 key={id}
                 className="elements-tab__element-groups__group-wrapper__element-wrapper--element"
-                onClick={() => handleElementClick(url)}>
+                onClick={() => handleElementClick(url)}
+                draggable>
                 <ResponsiveImg src={url} alt={`Element ${id}`} />
               </div>
             ))}
