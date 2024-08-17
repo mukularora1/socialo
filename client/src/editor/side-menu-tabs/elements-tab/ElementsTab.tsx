@@ -47,8 +47,10 @@ function ElementsTab() {
         lockScalingX: false,
         lockScalingY: false,
         opacity: 1,
-        scaleX: 0.5,
-        scaleY: 0.5,
+        scaleX: 1,
+        zoomX: 1,
+        zoomY: 1,
+        scaleY: 1,
       })
     );
   };

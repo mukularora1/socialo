@@ -1,0 +1,11 @@
+.images-tab__images-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.images-tab__images-wrapper__image {
+  background-color: var(--brand-secondary-color);
+  width: 45%;
+  aspect-ratio: 1;
+}

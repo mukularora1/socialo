@@ -9,6 +9,7 @@ import {
   FormatItalic as FormatItalicIcon,
   FormatUnderlined as FormatUnderlinedIcon,
   Lock as LockIcon,
+  Mode as ModeIcon,
   Opacity as OpacityIcon,
   Redo as RedoIcon,
   Undo as UndoIcon,
@@ -80,6 +81,11 @@ function TopToolbar() {
       component: RedoIcon,
       tooltip: "Redo",
       isShow: isSvg,
+    },
+    {
+      component: ModeIcon,
+      tooltip: "Mode",
+      isShow: true,
     },
   ];
   return (

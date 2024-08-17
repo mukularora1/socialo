@@ -1,0 +1,36 @@
+.text-tab {
+}
+.side-menu__heading {
+}
+.text-tab__text-variants {
+}
+.text-tab__text-variants__item {
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  background-color: var(--brand-secondary-color);
+  margin: 4px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 500ms;
+}
+
+.text-tab__text-variants__heading {
+  font-size: 30px;
+}
+
+.text-tab__text-variants__sub-heading {
+  font-size: 24px;
+}
+
+.text-tab__text-variants__para {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.text-tab__text-variants__item:hover {
+  opacity: 0.8;
+}
