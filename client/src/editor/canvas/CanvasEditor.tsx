@@ -2,7 +2,12 @@ import * as fabric from "fabric"; // v6
 import { FabricImage } from "fabric";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCanvasStore, updateSelectedObject } from "../store/editorSlice";
+import {
+  selectCanvasStore,
+  updateObjects,
+  updateSelectedObject,
+} from "../store/editorSlice";
+import { getElementImpInfo } from "./canvas.utils";
 
 function CanvasEditor() {
   const canvasEl = useRef(null);
@@ -25,59 +30,48 @@ function CanvasEditor() {
       preserveObjectStacking: true,
     });
     el.on("selection:updated", ({ selected }) => {
-      console.log(selected[0]?.fill);
-      dispatch(updateSelectedObject(selected[0]));
-      console.log("k");
+      console.log(selected);
+      const selectedElInfo = getElementImpInfo(selected[0]);
+      if (selectedElInfo && selectedElInfo.id) {
+        console.log(selectedElInfo);
+      }
     });
     el.on("selection:created", ({ selected }) => {
-      console.log(selected[0]?.fill);
-      dispatch(updateSelectedObject(selected[0]));
-      console.log("k");
+      console.log(selected);
+      canvas?.getActiveObject();
+      const selectedElInfo = getElementImpInfo(selected[0]);
+      dispatch(updateSelectedObject(selectedElInfo));
+      console.log(selectedElInfo);
     });
     el.on("object:modified", (e) => {
       console.log("kp", e.target);
+      console.log("l", el?.getActiveObject());
+
+      const selectedElInfo = getElementImpInfo(e.target);
+      console.log(selectedElInfo);
+      dispatch(updateObjects(selectedElInfo));
     });
     el.on("object:added", (e) => {
-      console.log("Object added:", e.target);
-      console.log("Object type:", e.target.type); // Type of the object
-      console.log("Object properties:", e.target.toObject());
+      console.log(e.target.type);
+
+      const selectedElInfo = getElementImpInfo(e.target);
+      console.log(selectedElInfo);
+      // canvasStore.objects.push(selectedElInfo);
+      // el?.setActiveObject(el.getObjects()[el.getObjects().length - 1]);
     });
-
-    // Function to load an image and add it to the canvas
-    // const fun = async () => {
-    //   const x = await fabric.Image.fromURL(
-    //     "https://i.imgur.com/tn6QBOD_d.webp?maxwidth=760&fidelity=grand"
-    //   );
-    //   x.scaleToWidth(50);
-    //   el.add(x);
-    // };
-    // fun();
-
-    // Add a rectangle
-    // const rect = new fabric.Rect({
-    //   left: 50,
-    //   top: 50,
-    //   fill: "red",
-    //   width: 50,
-    //   height: 50,
+    // const editableText = new fabric.IText("Edit me!", {
+    //   left: 100, // X position on the canvas
+    //   top: 100, // Y position on the canvas
+    //   fontFamily: "Arial", // Font family
+    //   fontSize: 30, // Font size
+    //   fill: "#000000", // Text color
+    //   editable: true, // Make the text editable
     // });
 
-    // if (el) {
-    //   el.add(rect);
-    // }
-    const editableText = new fabric.IText("Edit me!", {
-      left: 100, // X position on the canvas
-      top: 100, // Y position on the canvas
-      fontFamily: "Arial", // Font family
-      fontSize: 30, // Font size
-      fill: "#000000", // Text color
-      editable: true, // Make the text editable
-    });
-
-    // Add the editable text object to the canvas
-    el.add(editableText);
-    const firstObject = el.getObjects()[0];
-    el.setActiveObject(firstObject);
+    // // Add the editable text object to the canvas
+    // el.add(editableText);
+    // const firstObject = el.getObjects()[0];
+    // el.setActiveObject(firstObject);
     el.renderAll();
     setCanvas(el);
     return () => {
@@ -91,6 +85,7 @@ function CanvasEditor() {
       canvas.clear();
       canvas.backgroundColor = "white"; // Set to your desired color
       canvas.renderAll();
+      console.log("1", canvasStore.objects);
       // Add objects from Redux store to canvas
       canvasStore.objects.forEach((obj) => {
         if (obj.type === "Image" && obj.options.url) {
@@ -102,24 +97,36 @@ function CanvasEditor() {
           };
           fun();
         }
-        if (obj.type === "svg" && obj.options.url) {
+        console.log(
+          (obj.type === "svg" || obj.type === "path" || obj.type === "group") &&
+            obj.url
+        );
+
+        if (
+          (obj.type === "svg" || obj.type === "path" || obj.type === "group") &&
+          obj.url
+        ) {
           const fun = async () => {
             try {
-              const { objects, options } = await fabric.loadSVGFromURL(
-                obj.options.url
-              );
-
-              // Filter out any null values
-              console.log(objects, options);
-
+              const { objects, options } = await fabric.loadSVGFromURL(obj.url);
               const filteredObjects = objects.filter((obj) => obj !== null);
-
-              // Group the filtered SVG elements
               const svgData = fabric.util.groupSVGElements(
                 filteredObjects,
                 options
               );
-              svgData.scaleToWidth(50);
+              svgData.set({
+                left: obj.left,
+                top: obj.top,
+                scaleX: obj.scaleX,
+                scaleY: obj.scaleY,
+                id: obj.id,
+                url: obj.url,
+                zoomX: 1,
+                zoomY: 1,
+                angle: obj.angle,
+              });
+              console.log(svgData);
+
               canvas.add(svgData);
               canvas.renderAll();
             } catch (error) {
@@ -132,12 +139,14 @@ function CanvasEditor() {
     }
   }, [canvasStore.objects]);
   useEffect(() => {
-    console.log("useeffect", canvas?.getActiveObject());
     canvas?.getActiveObject()?.set("fill", canvasStore.fill);
     canvas?.renderAll();
   }, [canvasStore.fill]);
+  const handleContextMenu = () => {
+    console.log("handleContextMenu");
+  };
   return (
-    <div>
+    <div onContextMenu={handleContextMenu}>
       <canvas
         ref={canvasEl}
         style={{ border: "1px solid black", width: "350px", height: "350px" }}

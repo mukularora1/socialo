@@ -1,32 +1,17 @@
-import BrushOutlinedIcon from "@mui/icons-material/BrushOutlined";
-import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
-import ImageIcon from "@mui/icons-material/Image";
-import InterestsOutlinedIcon from "@mui/icons-material/InterestsOutlined";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
-import TextFieldsOutlinedIcon from "@mui/icons-material/TextFieldsOutlined";
 import classNames from "classnames";
 import { ComponentType, useEffect, useRef, useState } from "react";
-// import ColorPickerTab from "../../editor/side-menu-tabs/color-picker-tab/ColorPickerTab";
-// import ElementsTab from "../../editor/side-menu-tabs/elements-tab/ElementsTab";
-// import AssetuploadTab from "../../editor/side-menu-tabs/asset-upload-tab/AssetuploadTab";
-import TextTab from "../../editor/side-menu-tabs/text-tab/TextTab";
 import "./sideMenu.css";
-function SideMenu() {
-  const menuItems = [
-    { Icon: InterestsOutlinedIcon, label: "Element" },
-    { Icon: TextFieldsOutlinedIcon, label: "Text" },
-    { Icon: CloudUploadOutlinedIcon, label: "Uploads" },
-    { Icon: BrushOutlinedIcon, label: "Draw" },
-    {
-      Icon: LayersOutlinedIcon,
-      label: "Pages",
-    },
-    {
-      Icon: ImageIcon,
-      label: "Images",
-    },
-  ];
+import { MenuItem } from "./sideMenuType";
+function SideMenu({
+  menuItems,
+  onTabChange,
+  children,
+}: {
+  menuItems: MenuItem[];
+  onTabChange: (id: string) => void;
+  children?: React.ReactNode;
+}) {
   const [menuSelectedPosition, setMenuSelectedPosition] = useState(
     0 - menuItems.length * 65
   );
@@ -34,19 +19,22 @@ function SideMenu() {
     Icon,
     label,
     index,
+    id,
   }: {
-    label: string;
+    label: String;
     Icon: ComponentType;
-    index: number;
+    index: Number;
+    id: String;
   }) => (
     <div
       className="sidemenu__list-wrapper__list"
-      onClick={() => handleMenuItemSelected(index)}>
-      <Icon sx={{ fontSize: "20px" }} />
+      onClick={() => handleMenuItemSelected(index, id)}>
+      {Icon}
       <div className="sidemenu__list-wrapper__list__label"> {label}</div>
     </div>
   );
-  const handleMenuItemSelected = (index: number) => {
+  const handleMenuItemSelected = (index: number, id: string) => {
+    onTabChange(id);
     setIsMenuClose(false);
     setMenuSelectedPosition((index - menuItems.length) * 65);
   };
@@ -73,6 +61,7 @@ function SideMenu() {
             key={index}
             Icon={item.Icon}
             label={item.label}
+            id={item.id}
             index={index}
           />
         ))}
@@ -89,12 +78,7 @@ function SideMenu() {
         className={classNames("sidemenu__content", {
           "sidemenu-close": isMenuClose,
         })}>
-        <div className="sidemenu__content__body">
-          {/* <ColorPickerTab /> */}
-          {/* <ElementsTab /> */}
-          {/* <AssetuploadTab /> */}
-          <TextTab />
-        </div>
+        <div className="sidemenu__content__body">{children}</div>
         <div
           className="sidemenu__close-btn"
           onClick={handleMenuClose}

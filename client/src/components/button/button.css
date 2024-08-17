@@ -27,7 +27,7 @@
 }
 /* text outline */
 .button__outlined {
-  background-color: #fff;
+  background-color: transparent;
   border: 1px solid var(--shadow-color);
 }
 /* text contained */

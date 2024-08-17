@@ -26,8 +26,6 @@ function ColorPickerTab() {
   const dispatch = useDispatch();
   const handleColorChange = (e) => {
     dispatch(updateFill(e));
-
-    // canvasStore.selectedObject.set("fill", e);
     setColor(e);
   };
   return (
