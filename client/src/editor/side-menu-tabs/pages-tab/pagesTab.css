@@ -1,0 +1,15 @@
+.page-tab__pages-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.page-tab__pages-wrapper__page {
+  background-color: var(--brand-secondary-color);
+  padding: 4px;
+  display: flex;
+  border-radius: 6px;
+  height: 75px;
+  border: 2px dashed var(--brand-secondary-color-light);
+  justify-content: center;
+  align-items: center;
+}
