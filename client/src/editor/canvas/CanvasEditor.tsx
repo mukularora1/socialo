@@ -27,7 +27,7 @@ function CanvasEditor() {
       width: 350,
       height: 350,
       preserveObjectStacking: true,
-      isDrawingMode: true,
+      // isDrawingMode: true,
     });
     // console.log(el);
     el.on("selection:updated", ({ selected }) => {
@@ -75,7 +75,7 @@ function CanvasEditor() {
     // el.setActiveObject(firstObject);
     el.renderAll();
     setCanvas(el);
-    el.isDrawingMode = true;
+    // el.isDrawingMode = true;
     if (el.freeDrawingBrush) {
       el.freeDrawingBrush.color = "#000000"; // Set brush color
       el.freeDrawingBrush.width = 5; // Set brush width
@@ -149,6 +149,23 @@ function CanvasEditor() {
     canvas?.renderAll();
   }, [canvasStore.fill]);
   useEffect(() => {
+    const activeObjects = canvas?.getActiveObjects();
+    if (activeObjects && canvas && activeObjects.length > 1) {
+      // Create a group from the selected objects
+      const group = new fabric.Group(activeObjects);
+
+      // Add the group to the canvas and remove the individual objects
+      canvas.add(group);
+      activeObjects.forEach((obj) => canvas.remove(obj));
+
+      // Set the group as the active object
+      canvas.setActiveObject(group);
+
+      // Render the canvas
+      canvas.renderAll();
+    }
+  }, [canvasStore.isGroup]);
+  useEffect(() => {
     if (canvasEl.current && canvas && canvasStore.newObject) {
       console.log("canvasStore.newObject.type", canvasStore.newObject.type);
 
@@ -162,23 +179,24 @@ function CanvasEditor() {
             const { objects, options } = await fabric.loadSVGFromURL(
               canvasStore.newObject.url
             );
-            console.log("l");
+            console.log("l", canvasStore.newObject.width / options.width);
 
             const filteredObjects = objects.filter((obj) => obj !== null);
-            const svgData = fabric.util.groupSVGElements(filteredObjects, {
-              ...options,
-              width: canvasStore.newObject.width,
-              height: canvasStore.newObject.height,
-            });
+            const svgData = fabric.util.groupSVGElements(
+              filteredObjects,
+              options
+            );
+            const scaleX = 100 / options.width;
+            const scaleY = 100 / options.height;
             svgData.set({
               left: canvasStore.newObject.left,
               top: canvasStore.newObject.top,
-              scaleX: canvasStore.newObject.scaleX,
-              scaleY: canvasStore.newObject.scaleY,
+              scaleX: scaleX,
+              scaleY: scaleY,
               id: canvasStore.newObject.id,
               url: canvasStore.newObject.url,
-              zoomX: 1,
-              zoomY: 1,
+              originX: "center",
+              originY: "center",
               angle: canvasStore.newObject.angle,
             });
             console.log(svgData);
