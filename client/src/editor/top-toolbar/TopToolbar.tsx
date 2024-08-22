@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../../components/button/Button";
 import InputBox from "../../components/input-box/InputBox";
 import Tooltip from "../../components/tooltip/Tooltip";
-import { selectCanvasStore } from "../store/editorSlice";
+import { selectCanvasStore, setIsGroup } from "../store/editorSlice";
 import { setSelectedTab } from "../store/sideMenuEditorSlice";
 import "./topToolbar.css";
 
@@ -88,6 +88,10 @@ function TopToolbar() {
       isShow: true,
     },
   ];
+  const handleGroupClick = () => {
+    console.log("k");
+    dispatch(setIsGroup());
+  };
   return (
     <div className="top-toolbar">
       <div className="top-toolbar__text-btn">
@@ -97,7 +101,11 @@ function TopToolbar() {
         <Button className="top-toolbar__text-btn__font-styles">
           Edit <AutoFixHighOutlinedIcon style={{ fontSize: "16px" }} />
         </Button>
-        <Button className="top-toolbar__text-btn__font-styles">Group</Button>
+        <Button
+          className="top-toolbar__text-btn__font-styles"
+          handleClick={handleGroupClick}>
+          Group
+        </Button>
         {icons.map(({ component: Icon, tooltip, method, isShow }, index) => (
           <IconButton
             key={index}

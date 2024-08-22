@@ -8,6 +8,7 @@ export const counterSlice = createSlice({
     selectedObject: null,
     fill: null,
     newObject: null,
+    isGroup: false,
   },
   reducers: {
     addObjects: (state, { payload }) => {
@@ -31,11 +32,19 @@ export const counterSlice = createSlice({
         state.objects[index] = payload;
       }
     },
+    setIsGroup: (state) => {
+      state.isGroup = !state.isGroup;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addObjects, updateSelectedObject, updateFill, updateObjects } =
-  counterSlice.actions;
+export const {
+  addObjects,
+  updateSelectedObject,
+  updateFill,
+  updateObjects,
+  setIsGroup,
+} = counterSlice.actions;
 export const selectCanvasStore = (state: any) => state.editorStore;
 export default counterSlice.reducer;
